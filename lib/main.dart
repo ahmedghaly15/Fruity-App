@@ -1,9 +1,21 @@
+import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:fruity_app/core/global/app_theme.dart';
 import 'package:fruity_app/features/splash/presentation/views/splash_view.dart';
 import 'package:get/get.dart';
 
-void main() {
+import 'core/utils/cache_helper.dart';
+import 'core/utils/my_bloc_observer.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  //===================== Observing My Bloc =====================
+  Bloc.observer = MyBlocObserver();
+
+  //===================== Initializing SharedPref =====================
+  await CacheHelper.init();
+
   runApp(const Fruity());
 }
 
