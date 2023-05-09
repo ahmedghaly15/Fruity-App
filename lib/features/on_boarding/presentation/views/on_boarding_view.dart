@@ -33,20 +33,26 @@ class _OnBoardingViewState extends State<OnBoardingView> {
           return Scaffold(
             appBar: AppBar(
               actions: <Widget>[
-                TextButton(
-                  onPressed: () => cubit.navigateDirectlyToAuthScreen(context),
-                  child: const Text(
-                    "SKIP",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w900,
-                      fontSize: 20,
-                      color: AppColors.kSplashBackgroundColor,
+                Visibility(
+                  visible: cubit.isLastBoarding ? false : true,
+                  child: TextButton(
+                    onPressed: () =>
+                        cubit.navigateDirectlyToAuthScreen(context),
+                    child: const Text(
+                      "SKIP",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontSize: 20,
+                        color: AppColors.kSplashBackgroundColor,
+                      ),
                     ),
                   ),
                 ),
               ],
             ),
-            body: OnBoardingViewBody(cubit: cubit),
+            body: OnBoardingViewBody(
+              cubit: cubit,
+            ),
           );
         },
       ),

@@ -8,14 +8,16 @@ import 'on_boarding_floating_button.dart';
 import 'page_view_indicator.dart';
 
 class OnBoardingViewBody extends StatelessWidget {
-  const OnBoardingViewBody({super.key, required this.cubit});
+  const OnBoardingViewBody({
+    super.key,
+    required this.cubit,
+  });
 
   final OnBoardingScreenCubit cubit;
 
   @override
   Widget build(BuildContext context) {
     PageController boardPageController = PageController();
-
     //======= OnBoarding Pages Content =======
     List<OnBoardingModel> boarding = [
       OnBoardingModel(

@@ -19,7 +19,9 @@ class SplashViewBody extends StatefulWidget {
 class _SplashViewBodyState extends State<SplashViewBody>
     with SingleTickerProviderStateMixin {
   late AnimationController animationController;
-  late Animation<Offset> slideAnimation;
+
+  late Animation<Offset> textSlideAnimation;
+  late Animation<Offset> logoSlideAnimation;
 
   @override
   void initState() {
@@ -27,7 +29,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
 
     setSystemUIOverlayStyle();
 
-    initFadingAnimation();
+    initSlidingAnimation();
 
     navigateToHome();
   }
@@ -44,10 +46,15 @@ class _SplashViewBodyState extends State<SplashViewBody>
     return Column(
       children: [
         const Spacer(),
-        Image.asset(AppAssets.splashLogo),
+        SlideTransition(
+          position: logoSlideAnimation,
+          child: Image.asset(
+            AppAssets.splashLogo,
+          ),
+        ),
         const SizedBox(height: 20),
         SlideTransition(
-          position: slideAnimation,
+          position: textSlideAnimation,
           child: Text(
             "Fruitylicious delights await!",
             style: AppStyles.textStyle16.copyWith(
@@ -72,14 +79,24 @@ class _SplashViewBodyState extends State<SplashViewBody>
     );
   }
 
-  void initFadingAnimation() {
+  void initSlidingAnimation() {
     animationController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 3),
     );
 
-    slideAnimation = Tween<Offset>(
-      begin: const Offset(0, 10),
+    textSlideAnimation = Tween<Offset>(
+      begin: const Offset(10, 0),
+      end: Offset.zero,
+    ).animate(
+      CurvedAnimation(
+        parent: animationController,
+        curve: Curves.fastOutSlowIn,
+      ),
+    );
+
+    logoSlideAnimation = Tween<Offset>(
+      begin: const Offset(-10, 0),
       end: Offset.zero,
     ).animate(
       CurvedAnimation(
@@ -93,7 +110,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
 
   void navigateToHome() {
     Future.delayed(
-      const Duration(milliseconds: 3500),
+      const Duration(milliseconds: 3700),
       () => AppNavigator.navigateAndFinish(
         screen: const OnBoardingView(),
         transition: Transition.fade,
