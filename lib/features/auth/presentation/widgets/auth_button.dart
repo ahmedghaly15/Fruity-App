@@ -2,6 +2,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:fruity_app/features/auth/presentation/manager/auth_view_states.dart';
 
+import '../../../../core/global/app_colors.dart';
 import '../../../../core/widgets/default_button.dart';
 import '../manager/auth_view_cubit.dart';
 
@@ -30,7 +31,7 @@ class AuthButton extends StatelessWidget {
         ),
         fallback: (context) => const Center(
           child: CircularProgressIndicator(
-            color: Colors.white,
+            color: AppColors.kPrimaryColor,
           ),
         ),
       ),

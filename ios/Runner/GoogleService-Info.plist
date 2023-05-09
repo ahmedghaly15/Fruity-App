@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>201088112292-9q7pj1isuc52cgkp0r6djbls6mdudgqb.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.201088112292-9q7pj1isuc52cgkp0r6djbls6mdudgqb</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBZbA31n3JC7YrJak5m_MLS0P9MEpX-hLM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>201088112292</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.fruityApp</string>
+	<key>PROJECT_ID</key>
+	<string>fruity-app-54060</string>
+	<key>STORAGE_BUCKET</key>
+	<string>fruity-app-54060.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:201088112292:ios:be8e086353ed08d80db831</string>
+</dict>
+</plist>
