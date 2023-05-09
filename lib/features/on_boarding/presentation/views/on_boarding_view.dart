@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruity_app/core/global/app_colors.dart';
 
+import '../../../../core/global/app_styles.dart';
+import '../../../../core/widgets/default_text_button.dart';
 import '../manager/on_boarding_cubit.dart';
 import '../manager/on_boarding_states.dart';
 import '../widgets/on_boarding_view_body.dart';
@@ -35,16 +37,13 @@ class _OnBoardingViewState extends State<OnBoardingView> {
               actions: <Widget>[
                 Visibility(
                   visible: cubit.isLastBoarding ? false : true,
-                  child: TextButton(
+                  child: DefaultTextButton(
                     onPressed: () =>
                         cubit.navigateDirectlyToAuthScreen(context),
-                    child: const Text(
-                      "SKIP",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w900,
-                        fontSize: 20,
-                        color: AppColors.kSplashBackgroundColor,
-                      ),
+                    title: "SKIP",
+                    textStyle: AppStyles.textStyle20.copyWith(
+                      fontWeight: FontWeight.w900,
+                      color: AppColors.kPrimaryColor,
                     ),
                   ),
                 ),

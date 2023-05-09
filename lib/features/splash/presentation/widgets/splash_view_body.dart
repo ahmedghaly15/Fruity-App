@@ -72,8 +72,8 @@ class _SplashViewBodyState extends State<SplashViewBody>
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
-        systemNavigationBarColor: AppColors.kSplashBackgroundColor,
-        statusBarColor: AppColors.kSplashBackgroundColor,
+        systemNavigationBarColor: AppColors.kPrimaryColor,
+        statusBarColor: AppColors.kPrimaryColor,
         statusBarBrightness: Brightness.light,
       ),
     );

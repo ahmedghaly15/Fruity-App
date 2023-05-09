@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fruity_app/features/auth/presentation/auth_view.dart';
 
 import '../../../../core/global/app_navigator.dart';
 import '../../../../core/models/on_boarding_model.dart';
 import '../../../../core/utils/cache_helper.dart';
+
+import '../../../auth/presentation/views/auth_view.dart';
 import 'on_boarding_states.dart';
 
 class OnBoardingScreenCubit extends Cubit<OnBoardingStates> {
@@ -36,7 +37,7 @@ class OnBoardingScreenCubit extends Cubit<OnBoardingStates> {
     //=========== For Navigating To The Next Page When The Last Page Is Not Reached ===========
     boardPageController.nextPage(
       duration: const Duration(milliseconds: 500),
-      curve: Curves.fastLinearToSlowEaseIn,
+      curve: Curves.easeIn,
     );
 
     emit(PageViewIndexChangedState());

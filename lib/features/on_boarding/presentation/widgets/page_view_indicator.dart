@@ -25,7 +25,7 @@ class PageViewIndicator extends StatelessWidget {
       count: boarding.length,
       effect: ExpandingDotsEffect(
         dotColor: Colors.grey,
-        activeDotColor: AppColors.kSplashBackgroundColor,
+        activeDotColor: AppColors.kPrimaryColor,
         dotHeight: SizeConfig.screenHeight! * 0.01,
         expansionFactor: SizeConfig.screenWidth! * 0.013,
         dotWidth: SizeConfig.screenWidth! * 0.02,

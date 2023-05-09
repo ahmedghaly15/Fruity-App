@@ -16,12 +16,15 @@ class OnBoardingFloatingButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      backgroundColor: AppColors.kSplashBackgroundColor,
+      backgroundColor: AppColors.kPrimaryColor,
       onPressed: () => cubit.navigateToAuthScreen(
         context,
         boardPageController,
       ),
-      child: const Icon(Icons.arrow_forward_ios),
+      child: const Icon(
+        Icons.arrow_forward_ios,
+        color: Colors.white,
+      ),
     );
   }
 }

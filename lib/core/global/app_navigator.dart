@@ -15,7 +15,7 @@ class AppNavigator {
 
   static void navigateAndFinish({
     required Widget screen,
-    Transition transition = Transition.rightToLeftWithFade,
+    Transition transition = Transition.rightToLeft,
   }) {
     Get.off(screen, transition: transition);
   }
@@ -25,7 +25,7 @@ class AppNavigator {
   }) {
     Get.offAll(
       screen,
-      transition: Transition.fade,
+      transition: Transition.rightToLeft,
     );
   }
 }
