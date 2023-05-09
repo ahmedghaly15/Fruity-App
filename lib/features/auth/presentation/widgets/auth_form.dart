@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruity_app/features/auth/presentation/manager/auth_view_cubit.dart';
 import 'package:fruity_app/features/auth/presentation/widgets/sign_up_auth_mode_components.dart';
 
+import '../../../../core/global/app_navigator.dart';
+import '../../../../core/utils/cache_helper.dart';
+import '../../../../core/utils/helper.dart';
 import '../../../../core/utils/size_config.dart';
+import '../../../home/presentation/views/home_view.dart';
 import '../manager/auth_view_states.dart';
 import 'auth_button.dart';
 import 'sign_in_auth_mode_components.dart';
@@ -11,8 +16,6 @@ import 'switch_auth_mode.dart';
 class AuthForm extends StatelessWidget {
   const AuthForm({
     super.key,
-    required this.cubit,
-    required this.state,
     required this.slideAnimation,
     required this.switchAuthMode,
     required this.formKey,
@@ -24,8 +27,6 @@ class AuthForm extends StatelessWidget {
     required this.addressController,
   });
 
-  final AuthViewCubit cubit;
-  final AuthViewStates state;
   final Animation<Offset> slideAnimation;
   final void Function() switchAuthMode;
   final GlobalKey<FormState> formKey;
@@ -40,49 +41,113 @@ class AuthForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: formKey,
-      child: Column(
-        children: <Widget>[
-          SignInAuthModeComponents(
-            cubit: cubit,
-            formKey: formKey,
-            emailController: emailController,
-            passwordController: passwordController,
-          ),
-          //======== For Adding Some Space =========
-          SizedBox(height: SizeConfig.screenHeight! * 0.02),
+    return BlocConsumer<AuthViewCubit, AuthViewStates>(
+      listener: (context, state) {
+        //=============== Controlling The States ===============
+        controlAuthViewStates(state, context);
+      },
+      builder: (context, state) {
+        final AuthViewCubit cubit = AuthViewCubit.getObject(context);
+        return Form(
+          key: formKey,
+          child: Column(
+            children: <Widget>[
+              SignInAuthModeComponents(
+                cubit: cubit,
+                formKey: formKey,
+                emailController: emailController,
+                passwordController: passwordController,
+              ),
+              //======== For Adding Some Space =========
+              SizedBox(height: SizeConfig.screenHeight! * 0.02),
 
-          if (authMode == AuthMode.signUp)
-            SignUpAuthModeComponents(
-              cubit: cubit,
-              signUpFormValidation: signUpFormValidation,
-              slideAnimation: slideAnimation,
-              authMode: authMode,
-              formKey: formKey,
-              passwordController: passwordController,
-              confirmPassController: confirmPassController,
-              addressController: addressController,
-              phoneController: phoneController,
-            ),
+              if (authMode == AuthMode.signUp)
+                SignUpAuthModeComponents(
+                  cubit: cubit,
+                  signUpFormValidation: signUpFormValidation,
+                  slideAnimation: slideAnimation,
+                  authMode: authMode,
+                  formKey: formKey,
+                  passwordController: passwordController,
+                  confirmPassController: confirmPassController,
+                  addressController: addressController,
+                  phoneController: phoneController,
+                ),
 
-          //======= For Adding Some Space =======
-          SizedBox(height: SizeConfig.screenHeight! * 0.05),
-          //=========== Sign In & Up Button ===========
-          AuthButton(
-            state: state,
-            authMode: authMode,
-            signInOrSignUp: signInOrSignUp,
+              //======= For Adding Some Space =======
+              SizedBox(height: SizeConfig.screenHeight! * 0.05),
+              //=========== Sign In & Up Button ===========
+              AuthButton(
+                state: state,
+                authMode: authMode,
+                signInOrSignUp: signInOrSignUp,
+              ),
+              //========= For Adding Some Space =========
+              SizedBox(height: SizeConfig.screenHeight! * 0.02),
+              SwitchAuthMode(
+                authMode: authMode,
+                switchAuthMode: switchAuthMode,
+              ),
+            ],
           ),
-          //========= For Adding Some Space =========
-          SizedBox(height: SizeConfig.screenHeight! * 0.02),
-          SwitchAuthMode(
-            authMode: authMode,
-            switchAuthMode: switchAuthMode,
-          ),
-        ],
-      ),
+        );
+      },
     );
+  }
+
+  void controlAuthViewStates(AuthViewStates state, BuildContext context) {
+    if (state is SignInErrorState) {
+      if (state.error == 'user-not-found') {
+        buildSnackBar(
+          message: "No user found for that email",
+          state: SnackBarStates.error,
+          context: context,
+        );
+      } else if (state.error == 'wrong-password') {
+        buildSnackBar(
+          message: "Wrong Password",
+          state: SnackBarStates.error,
+          context: context,
+        );
+      }
+    }
+
+    if (state is SignUpErrorState) {
+      if (state.error == 'weak-password') {
+        buildSnackBar(
+          message: "Password is too weak",
+          state: SnackBarStates.error,
+          context: context,
+        );
+      } else if (state.error == 'email-already-in-use') {
+        buildSnackBar(
+          message: "Account already exists",
+          state: SnackBarStates.error,
+          context: context,
+        );
+      }
+    }
+
+    if (state is SignInSuccessState) {
+      CacheHelper.saveData(key: 'uId', value: state.uId).then((value) {
+        AppNavigator.navigateAndFinish(screen: const HomeView());
+      });
+    }
+
+    if (state is SignUpSuccessState) {
+      CacheHelper.saveData(key: 'uId', value: state.uId).then((value) {
+        AppNavigator.navigateAndFinish(screen: const HomeView());
+      });
+      buildSnackBar(
+        message: "Account Created Successfully",
+        state: SnackBarStates.success,
+        context: context,
+      );
+    }
+
+    if (state is CreateUserSuccessState) {
+      AppNavigator.navigateAndFinish(screen: const HomeView());
+    }
   }
 
   void signUpFormValidation(BuildContext context) {

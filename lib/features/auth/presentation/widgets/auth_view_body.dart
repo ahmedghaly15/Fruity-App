@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fruity_app/features/auth/presentation/manager/auth_view_cubit.dart';
-import 'package:fruity_app/features/auth/presentation/manager/auth_view_states.dart';
 
+import '../../../../core/global/app_network_images.dart';
 import '../../../../core/global/app_styles.dart';
 import '../../../../core/utils/size_config.dart';
 import 'auth_form.dart';
@@ -10,7 +10,6 @@ import 'auth_form.dart';
 class AuthViewBody extends StatelessWidget {
   const AuthViewBody({
     super.key,
-    required this.cubit,
     required this.slideAnimation,
     required this.formKey,
     required this.emailController,
@@ -20,11 +19,8 @@ class AuthViewBody extends StatelessWidget {
     required this.addressController,
     required this.switchAuthMode,
     required this.authMode,
-    required this.state,
   });
 
-  final AuthViewCubit cubit;
-  final AuthViewStates state;
   final Animation<Offset> slideAnimation;
   final void Function() switchAuthMode;
   final GlobalKey<FormState> formKey;
@@ -43,11 +39,11 @@ class AuthViewBody extends StatelessWidget {
       decoration: BoxDecoration(
         image: DecorationImage(
           image: const CachedNetworkImageProvider(
-            'https://img.freepik.com/free-vector/realistic-ftuiys-juice-splash-burst-composition-with-spray-images-ripe-tropical-fruits-blank_1284-29364.jpg?w=740&t=st=1683654680~exp=1683655280~hmac=eeb6136ca844a520733a8a85edc214401c460f709a867271a422c251ef7c3c51',
+            AppNetworkImages.authViewBackground,
           ),
           fit: BoxFit.cover,
           colorFilter: ColorFilter.mode(
-            Colors.black.withOpacity(0.7),
+            Colors.black.withOpacity(0.8),
             BlendMode.dstATop,
           ),
         ),
@@ -77,8 +73,6 @@ class AuthViewBody extends StatelessWidget {
                 SizedBox(height: SizeConfig.screenHeight! * 0.03),
                 //======================= Auth Form =======================
                 AuthForm(
-                  cubit: cubit,
-                  state: state,
                   slideAnimation: slideAnimation,
                   authMode: authMode,
                   switchAuthMode: switchAuthMode,
