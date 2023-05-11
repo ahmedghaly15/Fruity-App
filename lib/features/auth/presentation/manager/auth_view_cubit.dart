@@ -47,6 +47,7 @@ class AuthViewCubit extends Cubit<AuthViewStates> {
   //============ For Signing Up A User ============
   void userSignUp({
     required String email,
+    required String username,
     required String password,
     required String phone,
     required String address,
@@ -62,6 +63,7 @@ class AuthViewCubit extends Cubit<AuthViewStates> {
         .then((value) {
       firestoreCreateUSer(
         email: email,
+        username: username,
         phone: phone,
         uId: value.user!.uid,
         address: address,
@@ -77,6 +79,7 @@ class AuthViewCubit extends Cubit<AuthViewStates> {
 
   void firestoreCreateUSer({
     required String email,
+    required String username,
     required String phone,
     required String uId,
     required String address,
@@ -86,6 +89,7 @@ class AuthViewCubit extends Cubit<AuthViewStates> {
       phone: phone,
       uId: uId,
       address: address,
+      username: username,
     );
     FirebaseFirestore.instance
         .collection('users')

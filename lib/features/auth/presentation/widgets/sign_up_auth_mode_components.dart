@@ -7,6 +7,7 @@ import '../manager/auth_view_cubit.dart';
 class SignUpAuthModeComponents extends StatelessWidget {
   const SignUpAuthModeComponents({
     super.key,
+    required this.usernameController,
     required this.confirmPassController,
     required this.addressController,
     required this.authMode,
@@ -21,6 +22,7 @@ class SignUpAuthModeComponents extends StatelessWidget {
   final GlobalKey<FormState> formKey;
   final void Function(BuildContext context) signUpFormValidation;
   final TextEditingController passwordController;
+  final TextEditingController usernameController;
   final TextEditingController confirmPassController;
   final TextEditingController phoneController;
   final TextEditingController addressController;
@@ -63,62 +65,79 @@ class SignUpAuthModeComponents extends StatelessWidget {
             ),
           ),
         ),
-        //======== Phone Input Field ========
-        if (authMode == AuthMode.signUp)
-          //======= For Adding Some Space =======
-          SizedBox(height: SizeConfig.screenHeight! * 0.02),
-        if (authMode == AuthMode.signUp)
-          AnimatedContainer(
-            duration: const Duration(seconds: 1),
-            curve: Curves.easeIn,
-            child: SlideTransition(
-              position: slideAnimation,
-              child: InputField(
-                key: const ValueKey("phone"),
-                hint: "Phone number",
-                controller: phoneController,
-                obsecure: false,
-                keyboardType: TextInputType.phone,
-                textCapitalization: TextCapitalization.none,
-                validating: (val) {
-                  if (val!.isEmpty) {
-                    return "Phone can't be blank";
-                  }
-                  return null;
-                },
-              ),
+        //======= For Adding Some Space =======
+        SizedBox(height: SizeConfig.screenHeight! * 0.02),
+        AnimatedContainer(
+          duration: const Duration(seconds: 1),
+          curve: Curves.easeIn,
+          child: SlideTransition(
+            position: slideAnimation,
+            child: InputField(
+              key: const ValueKey("username"),
+              hint: "Username",
+              controller: usernameController,
+              obsecure: false,
+              keyboardType: TextInputType.text,
+              textCapitalization: TextCapitalization.words,
+              validating: (val) {
+                if (val!.isEmpty) {
+                  return "Username can't be blank";
+                }
+                return null;
+              },
             ),
           ),
-        if (authMode == AuthMode.signUp)
-          //======= For Adding Some Space =======
-          SizedBox(height: SizeConfig.screenHeight! * 0.02),
-        if (authMode == AuthMode.signUp)
-          AnimatedContainer(
-            duration: const Duration(seconds: 1),
-            curve: Curves.easeIn,
-            child: SlideTransition(
-              position: slideAnimation,
-              child: InputField(
-                key: const ValueKey("address"),
-                hint: "Address",
-                controller: addressController,
-                obsecure: false,
-                keyboardType: TextInputType.text,
-                textCapitalization: TextCapitalization.none,
-                validating: (val) {
-                  if (val!.isEmpty) {
-                    return "Address can't be blank";
-                  }
-                  return null;
-                },
-                onSubmit: (String value) {
-                  if (formKey.currentState!.validate()) {
-                    signUpFormValidation(context);
-                  }
-                },
-              ),
+        ),
+        SizedBox(height: SizeConfig.screenHeight! * 0.02),
+        AnimatedContainer(
+          duration: const Duration(seconds: 1),
+          curve: Curves.easeIn,
+          child: SlideTransition(
+            position: slideAnimation,
+            child: InputField(
+              key: const ValueKey("phone"),
+              hint: "Phone number",
+              controller: phoneController,
+              obsecure: false,
+              keyboardType: TextInputType.phone,
+              textCapitalization: TextCapitalization.none,
+              validating: (val) {
+                if (val!.isEmpty) {
+                  return "Phone can't be blank";
+                }
+                return null;
+              },
             ),
-          )
+          ),
+        ),
+        //======= For Adding Some Space =======
+        SizedBox(height: SizeConfig.screenHeight! * 0.02),
+        AnimatedContainer(
+          duration: const Duration(seconds: 1),
+          curve: Curves.easeIn,
+          child: SlideTransition(
+            position: slideAnimation,
+            child: InputField(
+              key: const ValueKey("address"),
+              hint: "Address",
+              controller: addressController,
+              obsecure: false,
+              keyboardType: TextInputType.text,
+              textCapitalization: TextCapitalization.none,
+              validating: (val) {
+                if (val!.isEmpty) {
+                  return "Address can't be blank";
+                }
+                return null;
+              },
+              onSubmit: (String value) {
+                if (formKey.currentState!.validate()) {
+                  signUpFormValidation(context);
+                }
+              },
+            ),
+          ),
+        )
       ],
     );
   }

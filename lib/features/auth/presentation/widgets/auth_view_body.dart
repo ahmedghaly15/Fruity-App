@@ -15,6 +15,7 @@ class AuthViewBody extends StatelessWidget {
     required this.slideAnimation,
     required this.formKey,
     required this.emailController,
+    required this.usernameController,
     required this.passwordController,
     required this.phoneController,
     required this.confirmPassController,
@@ -32,6 +33,7 @@ class AuthViewBody extends StatelessWidget {
 
   //============ TextFormFields Controllers ============
   final TextEditingController emailController;
+  final TextEditingController usernameController;
   final TextEditingController passwordController;
   final TextEditingController phoneController;
   final TextEditingController confirmPassController;
@@ -58,7 +60,7 @@ class AuthViewBody extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: SizeConfig.screenWidth! * 0.05,
-                vertical: SizeConfig.screenHeight! * 0.05,
+                vertical: SizeConfig.screenHeight! * 0.03,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,6 +87,7 @@ class AuthViewBody extends StatelessWidget {
                     switchAuthMode: switchAuthMode,
                     formKey: formKey,
                     emailController: emailController,
+                    usernameController: usernameController,
                     passwordController: passwordController,
                     confirmPassController: confirmPassController,
                     addressController: addressController,
@@ -98,7 +101,6 @@ class AuthViewBody extends StatelessWidget {
                       ImageButton(image: AppAssets.facebookImg),
                     ],
                   ),
-                  SizedBox(height: SizeConfig.screenHeight! * 0.03),
                 ],
               ),
             ),

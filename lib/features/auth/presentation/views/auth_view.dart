@@ -18,6 +18,7 @@ class _AuthViewState extends State<AuthView> with TickerProviderStateMixin {
 
   //============ TextFormFields Controllers ============
   final TextEditingController emailController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController confirmPassController = TextEditingController();
@@ -61,6 +62,7 @@ class _AuthViewState extends State<AuthView> with TickerProviderStateMixin {
             switchAuthMode: switchAuthMode,
             formKey: formKey,
             emailController: emailController,
+            usernameController: usernameController,
             passwordController: passwordController,
             confirmPassController: confirmPassController,
             addressController: addressController,
@@ -100,8 +102,8 @@ class _AuthViewState extends State<AuthView> with TickerProviderStateMixin {
       });
 
     _backgroundImgAnimation = Tween<Offset>(
-      begin: const Offset(0, -0.05),
-      end: const Offset(0, 0.07),
+      begin: const Offset(0, -0.02),
+      end: const Offset(0, 0.04),
     ).animate(_backgroundImgcontroller);
 
     _backgroundImgcontroller.forward();

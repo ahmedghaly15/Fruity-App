@@ -21,6 +21,7 @@ class AuthForm extends StatelessWidget {
     required this.formKey,
     required this.authMode,
     required this.emailController,
+    required this.usernameController,
     required this.passwordController,
     required this.phoneController,
     required this.confirmPassController,
@@ -34,6 +35,7 @@ class AuthForm extends StatelessWidget {
 
   //============ TextFormFields Controllers ============
   final TextEditingController emailController;
+  final TextEditingController usernameController;
   final TextEditingController passwordController;
   final TextEditingController phoneController;
   final TextEditingController confirmPassController;
@@ -68,6 +70,7 @@ class AuthForm extends StatelessWidget {
                   slideAnimation: slideAnimation,
                   authMode: authMode,
                   formKey: formKey,
+                  usernameController: usernameController,
                   passwordController: passwordController,
                   confirmPassController: confirmPassController,
                   addressController: addressController,
@@ -155,6 +158,7 @@ class AuthForm extends StatelessWidget {
     AuthViewCubit.getObject(context).userSignUp(
       context: context,
       email: emailController.text,
+      username: usernameController.text,
       password: passwordController.text,
       phone: phoneController.text,
       address: addressController.text,

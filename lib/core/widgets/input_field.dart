@@ -64,7 +64,7 @@ class InputField extends StatelessWidget {
           borderRadius: BorderRadius.circular(15),
         ),
       ),
-      cursorColor: Colors.black,
+      cursorColor: AppColors.kPrimaryColor,
       style: AppStyles.textStyle20,
       obscureText: obsecure!,
       keyboardType: keyboardType,
