@@ -12,8 +12,7 @@ class AuthView extends StatefulWidget {
   State<AuthView> createState() => _AuthViewState();
 }
 
-class _AuthViewState extends State<AuthView>
-    with SingleTickerProviderStateMixin {
+class _AuthViewState extends State<AuthView> with TickerProviderStateMixin {
   final GlobalKey<FormState> formKey = GlobalKey();
   AuthMode authMode = AuthMode.signIn;
 
@@ -25,21 +24,25 @@ class _AuthViewState extends State<AuthView>
   final TextEditingController addressController = TextEditingController();
 
   // Animations
-  late AnimationController _controller;
-  late Animation<Offset> slideAnimation;
+  late AnimationController _slidecontroller;
+  late Animation<Offset> _slideAnimation;
+  late AnimationController _backgroundImgcontroller;
+  late Animation<Offset> _backgroundImgAnimation;
 
   @override
   void initState() {
-    //============ Controlling Animations ============
     initSlidingAnimation();
+
+    initbackgroundImgSlideAnimation();
 
     super.initState();
   }
 
   @override
   void dispose() {
-    // Destroying The Controller
-    _controller.dispose();
+    // Destroying The Controllers
+    _slidecontroller.dispose();
+    _backgroundImgcontroller.dispose();
     super.dispose();
   }
 
@@ -52,7 +55,8 @@ class _AuthViewState extends State<AuthView>
         onTap: () => FocusScope.of(context).unfocus(),
         child: Scaffold(
           body: AuthViewBody(
-            slideAnimation: slideAnimation,
+            slideAnimation: _slideAnimation,
+            backgroundImgAnimation: _backgroundImgAnimation,
             authMode: authMode,
             switchAuthMode: switchAuthMode,
             formKey: formKey,
@@ -68,17 +72,39 @@ class _AuthViewState extends State<AuthView>
   }
 
   void initSlidingAnimation() {
-    _controller = AnimationController(
+    _slidecontroller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 400),
+      duration: const Duration(seconds: 1),
     );
 
-    slideAnimation = Tween<Offset>(
+    _slideAnimation = Tween<Offset>(
       begin: const Offset(0, -0.15),
       end: const Offset(0, 0),
     ).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.fastOutSlowIn),
+      CurvedAnimation(parent: _slidecontroller, curve: Curves.fastOutSlowIn),
     );
+  }
+
+  void initbackgroundImgSlideAnimation() {
+    _backgroundImgcontroller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+      reverseDuration: const Duration(seconds: 2),
+    )..addStatusListener((AnimationStatus status) {
+        if (status == AnimationStatus.completed) {
+          _backgroundImgcontroller.reverse();
+        }
+        if (status == AnimationStatus.dismissed) {
+          _backgroundImgcontroller.forward();
+        }
+      });
+
+    _backgroundImgAnimation = Tween<Offset>(
+      begin: const Offset(0, -0.05),
+      end: const Offset(0, 0.07),
+    ).animate(_backgroundImgcontroller);
+
+    _backgroundImgcontroller.forward();
   }
 
   //=========== For Switching Between Auth Modes ===========
@@ -88,12 +114,12 @@ class _AuthViewState extends State<AuthView>
         authMode = AuthMode.signUp;
       });
 
-      _controller.forward();
+      _slidecontroller.forward();
     } else {
       setState(() {
         authMode = AuthMode.signIn;
       });
-      _controller.reverse();
+      _slidecontroller.reverse();
     }
   }
 }

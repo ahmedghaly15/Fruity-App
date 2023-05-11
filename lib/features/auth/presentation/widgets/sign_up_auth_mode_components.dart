@@ -33,7 +33,7 @@ class SignUpAuthModeComponents extends StatelessWidget {
     return Column(
       children: <Widget>[
         AnimatedContainer(
-          duration: const Duration(milliseconds: 400),
+          duration: const Duration(seconds: 1),
           curve: Curves.easeIn,
           child: SlideTransition(
             position: slideAnimation,
@@ -69,7 +69,7 @@ class SignUpAuthModeComponents extends StatelessWidget {
           SizedBox(height: SizeConfig.screenHeight! * 0.02),
         if (authMode == AuthMode.signUp)
           AnimatedContainer(
-            duration: const Duration(milliseconds: 400),
+            duration: const Duration(seconds: 1),
             curve: Curves.easeIn,
             child: SlideTransition(
               position: slideAnimation,
@@ -94,7 +94,7 @@ class SignUpAuthModeComponents extends StatelessWidget {
           SizedBox(height: SizeConfig.screenHeight! * 0.02),
         if (authMode == AuthMode.signUp)
           AnimatedContainer(
-            duration: const Duration(milliseconds: 400),
+            duration: const Duration(seconds: 1),
             curve: Curves.easeIn,
             child: SlideTransition(
               position: slideAnimation,
