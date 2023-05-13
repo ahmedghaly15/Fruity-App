@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fruity_app/core/global/app_colors.dart';
 import 'package:fruity_app/features/on_boarding/presentation/views/on_boarding_view.dart';
-import 'package:get/get.dart';
 
 import '../../../../core/global/app_assets.dart';
 import '../../../../core/global/app_navigator.dart';
@@ -111,10 +110,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
   void navigateToHome() {
     Future.delayed(
       const Duration(milliseconds: 3700),
-      () => AppNavigator.navigateAndFinish(
-        screen: const OnBoardingView(),
-        transition: Transition.fade,
-      ),
+      () => AppNavigator.navigateAndFinish(screen: const OnBoardingView()),
     );
   }
 }

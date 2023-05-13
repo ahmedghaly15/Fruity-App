@@ -4,7 +4,7 @@ class ImageButton extends StatelessWidget {
   const ImageButton({
     super.key,
     required this.image,
-    this.width = 50,
+    this.width = 55,
     this.onTap,
   });
 

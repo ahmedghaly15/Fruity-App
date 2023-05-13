@@ -93,6 +93,7 @@ class AuthViewCubit extends Cubit<AuthViewStates> {
   }
 
   void signInWithGoogle() {
+    emit(SignInWithGoogleLoadingState());
     authRepo.signInWithGoogle().then((value) {
       emit(SignInWithGoogleSuccessState(value.user!.uid));
       CacheHelper.saveData(key: 'uId', value: value.user!.uid);

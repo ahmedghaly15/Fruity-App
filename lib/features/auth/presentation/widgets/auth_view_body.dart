@@ -94,11 +94,16 @@ class AuthViewBody extends StatelessWidget {
                     phoneController: phoneController,
                   ),
                   SizedBox(height: SizeConfig.screenHeight! * 0.03),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      ImageButton(image: AppAssets.googleImg),
-                      ImageButton(image: AppAssets.facebookImg),
+                      ImageButton(
+                        image: AppAssets.googleImg,
+                        onTap: () {
+                          AuthViewCubit.getObject(context).signInWithGoogle();
+                        },
+                      ),
+                      const ImageButton(image: AppAssets.facebookImg),
                     ],
                   ),
                 ],

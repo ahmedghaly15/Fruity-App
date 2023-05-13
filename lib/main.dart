@@ -28,6 +28,8 @@ Future<void> main() async {
   runApp(const Fruity());
 }
 
+// TODO : Replcae BlocConsumer in OnBoardingView with BlocBuilder
+
 class Fruity extends StatelessWidget {
   const Fruity({super.key});
 

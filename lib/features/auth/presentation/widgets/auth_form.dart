@@ -151,6 +151,10 @@ class AuthForm extends StatelessWidget {
     if (state is CreateUserSuccessState) {
       AppNavigator.navigateAndFinish(screen: const HomeView());
     }
+
+    if (state is SignInWithGoogleSuccessState) {
+      AppNavigator.navigateAndFinish(screen: const HomeView());
+    }
   }
 
   void signUpFormValidation(BuildContext context) {
