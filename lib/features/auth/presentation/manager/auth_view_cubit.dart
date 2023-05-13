@@ -1,20 +1,21 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/models/user_model.dart';
 import '../../../../core/utils/cache_helper.dart';
+import '../../domain/repositries/auth_repo.dart';
 import 'auth_view_states.dart';
 
 enum AuthMode { signIn, signUp }
 
 //==================== Auth View Cubit ====================
 class AuthViewCubit extends Cubit<AuthViewStates> {
-  AuthViewCubit() : super(AuthViewInitialState()) {
+  AuthViewCubit(this.authRepo) : super(AuthViewInitialState()) {
     passVisibility = true;
     confirmPassVisiblity = true;
   }
+
+  AuthRepo authRepo;
 
   //============ Getting An Object Of The Cubit ============
   static AuthViewCubit getObject(context) => BlocProvider.of(context);
@@ -29,12 +30,7 @@ class AuthViewCubit extends Cubit<AuthViewStates> {
     required BuildContext context,
   }) {
     emit(SignInLoadingState());
-    FirebaseAuth.instance
-        .signInWithEmailAndPassword(
-      email: email,
-      password: password,
-    )
-        .then((value) {
+    authRepo.userSignIn(email: email, password: password).then((value) {
       emit(SignInSuccessState(value.user!.uid));
       CacheHelper.saveData(key: 'uId', value: value.user!.uid);
     }).catchError((error) {
@@ -55,12 +51,7 @@ class AuthViewCubit extends Cubit<AuthViewStates> {
   }) {
     emit(SignUpLoadingState());
 
-    FirebaseAuth.instance
-        .createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    )
-        .then((value) {
+    authRepo.userSignUp(email: email, password: password).then((value) {
       firestoreCreateUSer(
         email: email,
         username: username,
@@ -84,23 +75,30 @@ class AuthViewCubit extends Cubit<AuthViewStates> {
     required String uId,
     required String address,
   }) {
-    UserModel userModel = UserModel(
+    authRepo
+        .firestoreCreateUSer(
       email: email,
+      username: username,
       phone: phone,
       uId: uId,
       address: address,
-      username: username,
-    );
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc(uId)
-        .set(userModel.toJson())
+    )
         .then((value) {
       emit(CreateUserSuccessState());
       emit(SignUpSuccessState(uId));
     }).catchError((error) {
       debugPrint(error.toString());
       CreateUserErrorState(error.toString());
+    });
+  }
+
+  void signInWithGoogle() {
+    authRepo.signInWithGoogle().then((value) {
+      emit(SignInWithGoogleSuccessState(value.user!.uid));
+      CacheHelper.saveData(key: 'uId', value: value.user!.uid);
+    }).catchError((error) {
+      debugPrint(error.toString());
+      emit(SignInWithGoogleErrorState(error.toString()));
     });
   }
 

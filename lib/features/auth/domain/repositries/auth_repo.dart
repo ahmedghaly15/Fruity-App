@@ -1,22 +1,25 @@
-import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class AuthRepo {
-  Future<void> userSignIn({
+  Future<UserCredential> userSignIn({
     required String email,
     required String password,
-    required BuildContext context,
   });
 
-  Future<void> userSignUp({
+  Future<UserCredential> userSignUp({
+    required String email,
+    required String password,
+  });
+
+  Future<void> firestoreCreateUSer({
     required String email,
     required String username,
-    required String password,
     required String phone,
+    required String uId,
     required String address,
-    required BuildContext context,
   });
 
-  Future googleSignIn();
+  Future<UserCredential> signInWithGoogle();
 
-  Future facebookSignIn();
+  Future signInWithFacebook();
 }

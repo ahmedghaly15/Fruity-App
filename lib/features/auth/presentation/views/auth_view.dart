@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fruity_app/core/utils/service_locator.dart';
 
+import '../../domain/repositries/auth_repo.dart';
 import '../manager/auth_view_cubit.dart';
 import '../widgets/auth_view_body.dart';
 
@@ -50,7 +52,8 @@ class _AuthViewState extends State<AuthView> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => AuthViewCubit(),
+      create: (BuildContext context) =>
+          AuthViewCubit(servicesLocator.get<AuthRepo>()),
       child: GestureDetector(
         // For Closing The Keyboard When The View Is Tapped
         onTap: () => FocusScope.of(context).unfocus(),

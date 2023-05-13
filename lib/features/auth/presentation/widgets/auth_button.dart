@@ -31,7 +31,8 @@ class AuthButton extends StatelessWidget {
         ),
         fallback: (context) => const Center(
           child: CircularProgressIndicator(
-            color: AppColors.kPrimaryColor,
+            color: Colors.white,
+            backgroundColor: AppColors.kPrimaryColor,
           ),
         ),
       ),

@@ -8,6 +8,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'core/utils/cache_helper.dart';
 import 'core/utils/firebase_options.dart';
 import 'core/utils/my_bloc_observer.dart';
+import 'core/utils/service_locator.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,6 +22,8 @@ Future<void> main() async {
 
   //===================== Initializing SharedPref =====================
   await CacheHelper.init();
+
+  ServicesLocator().setupServiceLocator();
 
   runApp(const Fruity());
 }

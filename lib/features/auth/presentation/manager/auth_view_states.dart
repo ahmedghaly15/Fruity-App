@@ -36,6 +36,16 @@ class CreateUserErrorState extends AuthViewStates {
   CreateUserErrorState(this.error);
 }
 
+class SignInWithGoogleSuccessState extends AuthViewStates {
+  final String uId;
+  SignInWithGoogleSuccessState(this.uId);
+}
+
+class SignInWithGoogleErrorState extends AuthViewStates {
+  final String error;
+  SignInWithGoogleErrorState(this.error);
+}
+
 class SwitchPassVisibleState extends AuthViewStates {}
 
 class SwitchConfirmPassVisibleState extends AuthViewStates {}
