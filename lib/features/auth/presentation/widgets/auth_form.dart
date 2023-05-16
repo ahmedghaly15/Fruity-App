@@ -11,6 +11,7 @@ import '../../../home/presentation/views/home_view.dart';
 import '../manager/auth_view_states.dart';
 import 'auth_button.dart';
 import 'sign_in_auth_mode_components.dart';
+import 'sign_in_with_google_buttons.dart';
 import 'switch_auth_mode.dart';
 
 class AuthForm extends StatelessWidget {
@@ -85,6 +86,9 @@ class AuthForm extends StatelessWidget {
                 authMode: authMode,
                 signInOrSignUp: signInOrSignUp,
               ),
+              if (authMode == AuthMode.signIn)
+                SizedBox(height: SizeConfig.screenHeight! * 0.03),
+              if (authMode == AuthMode.signIn) const SignInWithGoogleButtons(),
               //========= For Adding Some Space =========
               SizedBox(height: SizeConfig.screenHeight! * 0.02),
               SwitchAuthMode(

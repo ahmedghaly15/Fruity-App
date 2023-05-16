@@ -35,6 +35,7 @@ class AuthViewCubit extends Cubit<AuthViewStates> {
       CacheHelper.saveData(key: 'uId', value: value.user!.uid);
     }).catchError((error) {
       if (error is FirebaseAuthException) {
+        // TODO: Look here how we handle exception and try the same with DioError
         emit(SignInErrorState(error.code.toString()));
       }
     });
@@ -102,6 +103,17 @@ class AuthViewCubit extends Cubit<AuthViewStates> {
       emit(SignInWithGoogleErrorState(error.toString()));
     });
   }
+
+  // void signInWithFacebook() {
+  //   emit(SignInWithFacebookLoadingState());
+  //   authRepo.signInWithFacebook().then((value) {
+  //     emit(SignInWithFacebookSuccessState(value.user!.uid));
+  //     CacheHelper.saveData(key: 'uId', value: value.user!.uid);
+  //   }).catchError((error) {
+  //     debugPrint(error.toString());
+  //     emit(SignInWithFacebookErrorState(error.toString()));
+  //   });
+  // }
 
   void switchPassVisibility() {
     passVisibility = !passVisibility;

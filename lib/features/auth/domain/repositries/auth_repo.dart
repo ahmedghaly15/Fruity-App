@@ -21,5 +21,5 @@ abstract class AuthRepo {
 
   Future<UserCredential> signInWithGoogle();
 
-  Future signInWithFacebook();
+  // Future<UserCredential> signInWithFacebook();
 }

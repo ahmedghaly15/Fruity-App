@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../global/app_colors.dart';
+import '../global/app_styles.dart';
 
 class DefaultButton extends StatelessWidget {
   final String buttonText;
-
   final double height;
   final double width;
   final void Function()? onPressed;
@@ -16,12 +16,7 @@ class DefaultButton extends StatelessWidget {
     required this.onPressed,
     this.height = 15,
     this.width = 130,
-    this.textStyle = const TextStyle(
-      fontSize: 24,
-      fontWeight: FontWeight.bold,
-      letterSpacing: 0.5,
-      color: Colors.white,
-    ),
+    this.textStyle = AppStyles.texStyle24,
   });
 
   @override
@@ -38,7 +33,7 @@ class DefaultButton extends StatelessWidget {
         backgroundColor: MaterialStateProperty.all(AppColors.kPrimaryColor),
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(16),
           ),
         ),
       ),

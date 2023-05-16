@@ -1,9 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:fruity_app/core/global/app_assets.dart';
 import 'package:fruity_app/core/global/app_network_images.dart';
 import 'package:fruity_app/features/auth/presentation/manager/auth_view_cubit.dart';
-import 'package:fruity_app/features/auth/presentation/widgets/image_button.dart';
 
 import '../../../../core/global/app_styles.dart';
 import '../../../../core/utils/size_config.dart';
@@ -92,19 +90,6 @@ class AuthViewBody extends StatelessWidget {
                     confirmPassController: confirmPassController,
                     addressController: addressController,
                     phoneController: phoneController,
-                  ),
-                  SizedBox(height: SizeConfig.screenHeight! * 0.03),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      ImageButton(
-                        image: AppAssets.googleImg,
-                        onTap: () {
-                          AuthViewCubit.getObject(context).signInWithGoogle();
-                        },
-                      ),
-                      const ImageButton(image: AppAssets.facebookImg),
-                    ],
                   ),
                 ],
               ),

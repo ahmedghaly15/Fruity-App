@@ -1,16 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:fruity_app/features/auth/domain/repositries/auth_repo.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../../core/models/user_model.dart';
 
 class AuthRepoImpl extends AuthRepo {
-  @override
-  Future signInWithFacebook() {
-    // TODO: implement facebookSignIn
-    throw UnimplementedError();
-  }
+  // @override
+  // Future<UserCredential> signInWithFacebook() async {
+  //   // Trigger the sign-in flow
+  //   final LoginResult loginResult = await FacebookAuth.instance.login();
+
+  //   // Create a credential from the access token
+  //   final OAuthCredential facebookAuthCredential =
+  //       FacebookAuthProvider.credential(loginResult.accessToken!.token);
+
+  //   // Once signed in, return the UserCredential
+  //   return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+  // }
 
   @override
   Future<UserCredential> signInWithGoogle() async {

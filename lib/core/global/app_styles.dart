@@ -20,6 +20,13 @@ class AppStyles {
     letterSpacing: 1,
   );
 
+  static const texStyle24 = TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.bold,
+    letterSpacing: 0.5,
+    color: Colors.white,
+  );
+
   static const textStyle20 = TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.w500,
