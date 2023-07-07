@@ -1,6 +1,42 @@
 # Fruity-App
 
-A new Flutter project.
+Fruity-App is a Flutter application that offers an engaging and user-friendly experience for fruit enthusiasts. It comes with several exciting features, including an animated splash screen, an onboarding page, and an animated authentication screen.
+
+## Contents
+
+- [Preview](#preview)
+- [App Structure](#app-structure)
+- [Features](#features)
+- [Getting Started](#getting-started)
+
+## Preview
+
+## App Structure
+
+```
+lib
+├── core
+│   ├── global
+│   ├── models
+│   ├── utils
+│   └── widgets
+│
+├── features
+│   ├── splash
+│   ├── on_boarding
+│   └── auth
+│
+└── main.dart
+
+```
+
+## Features
+
+- `Animated Splash Screen`: Upon launching the app, users are greeted with a visually appealing animated splash screen. This screen serves as an introductory element to create a positive first impression and captivate the user's attention.
+
+- `On Boarding Screen`: The app includes an onboarding page to familiarize new users with its functionalities. The onboarding process typically consists of multiple screens that provide information about the app's core features, benefits, and how to navigate through the interface. It aims to enhance user engagement and showcase the value proposition of the app.
+
+- `Animated Authentication Screen`: The authentication screen in Fruity-App incorporates captivating animations to make the login/signup process more enjoyable for users. These animations add a touch of dynamism and interactivity, improving the overall user experience.
 
 ## Getting Started
 

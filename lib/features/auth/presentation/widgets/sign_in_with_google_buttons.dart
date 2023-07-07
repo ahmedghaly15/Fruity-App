@@ -25,7 +25,7 @@ class SignInWithGoogleButtons extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: AppColors.kPrimaryColor,
+                color: AppColors.kGoogleColor,
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Image.asset(

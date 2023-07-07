@@ -17,10 +17,8 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  //===================== Observing My Bloc =====================
   Bloc.observer = MyBlocObserver();
 
-  //===================== Initializing SharedPref =====================
   await CacheHelper.init();
 
   ServicesLocator().setupServiceLocator();

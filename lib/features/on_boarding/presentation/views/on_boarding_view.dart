@@ -27,8 +27,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (BuildContext context) => OnBoardingScreenCubit(),
-      child: BlocConsumer<OnBoardingScreenCubit, OnBoardingStates>(
-        listener: (context, state) {},
+      child: BlocBuilder<OnBoardingScreenCubit, OnBoardingStates>(
         builder: (context, state) {
           OnBoardingScreenCubit cubit =
               OnBoardingScreenCubit.getObject(context);

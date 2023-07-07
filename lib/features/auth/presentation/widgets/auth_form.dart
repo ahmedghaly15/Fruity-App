@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruity_app/features/auth/presentation/manager/auth_view_cubit.dart';
 import 'package:fruity_app/features/auth/presentation/widgets/sign_up_auth_mode_components.dart';
 
+import '../../../../core/global/app_colors.dart';
 import '../../../../core/global/app_navigator.dart';
 import '../../../../core/utils/cache_helper.dart';
 import '../../../../core/utils/helper.dart';
@@ -10,6 +11,7 @@ import '../../../../core/utils/size_config.dart';
 import '../../../home/presentation/views/home_view.dart';
 import '../manager/auth_view_states.dart';
 import 'auth_button.dart';
+import 'custom_divider.dart';
 import 'sign_in_auth_mode_components.dart';
 import 'sign_in_with_google_buttons.dart';
 import 'switch_auth_mode.dart';
@@ -86,9 +88,26 @@ class AuthForm extends StatelessWidget {
                 authMode: authMode,
                 signInOrSignUp: signInOrSignUp,
               ),
-              if (authMode == AuthMode.signIn)
-                SizedBox(height: SizeConfig.screenHeight! * 0.03),
-              if (authMode == AuthMode.signIn) const SignInWithGoogleButtons(),
+              if (authMode == AuthMode.signIn) ...[
+                SizedBox(height: SizeConfig.screenHeight! * 0.04),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const CustomDivider(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Text(
+                        "Or",
+                        style: TextStyle(color: AppColors.kDividerColor),
+                      ),
+                    ),
+                    const CustomDivider(),
+                  ],
+                ),
+                SizedBox(height: SizeConfig.screenHeight! * 0.025),
+                const SignInWithGoogleButtons(),
+              ],
+
               //========= For Adding Some Space =========
               SizedBox(height: SizeConfig.screenHeight! * 0.02),
               SwitchAuthMode(
