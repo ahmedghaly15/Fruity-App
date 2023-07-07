@@ -11,6 +11,8 @@ Fruity-App is a Flutter application that offers an engaging and user-friendly ex
 
 ## Preview
 
+https://github.com/ahmedghaly15/Fruity-App/assets/108659381/420443a5-bd84-47e3-b438-f3ac231746a7
+
 ## App Structure
 
 ```
