@@ -36,41 +36,33 @@ class InputField extends StatelessWidget {
       controller: controller,
       decoration: InputDecoration(
         hintText: hint,
-        hintStyle: hintStyle,
+        hintStyle: hintStyle!.copyWith(color: Colors.grey),
         prefixIcon: prefixIcon,
         prefixIconColor: AppColors.kPrimaryColor,
         suffixIcon: icon,
         suffixIconColor: AppColors.kPrimaryColor,
         contentPadding: const EdgeInsets.all(10),
-        enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-            color: Colors.grey,
-            width: 0,
-          ),
-          borderRadius: BorderRadius.circular(15),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-            color: AppColors.kPrimaryColor,
-            width: 2,
-          ),
-          borderRadius: BorderRadius.circular(15),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-            color: Colors.red,
-            width: 2,
-          ),
-          borderRadius: BorderRadius.circular(15),
-        ),
+        enabledBorder: buildOutlineInputBorder(Colors.grey, 0),
+        focusedBorder: buildOutlineInputBorder(AppColors.kPrimaryColor, 2),
+        errorBorder: buildOutlineInputBorder(Colors.red, 2),
       ),
       cursorColor: AppColors.kPrimaryColor,
-      style: AppStyles.textStyle20,
+      style: AppStyles.textStyle20.copyWith(color: AppColors.kPrimaryColor),
       obscureText: obsecure!,
       keyboardType: keyboardType,
       textCapitalization: textCapitalization,
       validator: validating,
       onFieldSubmitted: onSubmit,
+    );
+  }
+
+  OutlineInputBorder buildOutlineInputBorder(Color color, double width) {
+    return OutlineInputBorder(
+      borderSide: BorderSide(
+        color: color,
+        width: width,
+      ),
+      borderRadius: BorderRadius.circular(15),
     );
   }
 }
